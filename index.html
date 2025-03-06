@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💌 A Smol Surprise for You 💌</title>
+    <style>
+        body {
+            background-color: #ffe6f2;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            overflow: hidden;
+        }
+        h1 {
+            color: #d63384;
+        }
+        .board {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            max-width: 450px;
+            margin: 20px auto;
+        }
+        .envelope {
+            width: 200px;
+            height: 200px;
+            background: #ff4d6d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: 50px;
+            cursor: pointer;
+            transition: transform 0.4s, background 0.4s;
+            position: relative;
+        }
+        .envelope.open {
+            background: #fff;
+        }
+        .message {
+            font-size: 20px;
+            color: #d63384;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 10px;
+            opacity: 0;
+            transition: opacity 0.4s;
+            background: white;
+            border-radius: 10px;
+        }
+        .envelope.open .message {
+            opacity: 1;
+        }
+        .big-envelope-container {
+            margin-top: 30px;
+        }
+        .big-envelope {
+            width: 80%;
+            max-width: 600px;
+            height: 250px;
+            background: #ff4d6d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            font-size: 60px;
+            cursor: pointer;
+            transition: transform 0.4s, background 0.4s;
+            margin: 20px auto;
+            position: relative;
+            display: none; /* Initially hidden */
+        }
+        .big-envelope.open {
+            background: #fff;
+            height: auto;
+            padding: 20px;
+            font-size: 18px;
+            text-align: center;
+            color: #d63384;
+            font-weight: bold;
+            line-height: 1.5;
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: pink;
+            opacity: 0.8;
+            border-radius: 50%;
+            animation: fall 2s linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>💌 Tap an Envelope for a Surprise! 💌</h1>
+    
+    <div class="board" id="board"></div>
+
+    <div class="big-envelope-container">
+        <div class="big-envelope" id="bigEnvelope">📩</div>
+    </div>
+
+    <script>
+        const messages = [
+            "అసలు తనని వర్ణించాలంటే..❤️",
+            "పార్వతీ సమానమె, ప్రణయమొ నాపై జారె.. 💕",
+            "నీ కంటిసూదగ నీలాంబరీ మమతా మాపె.. 😊",
+            "శరద్ధ పౌర్ణమి వెన్నెలై, నా హృదయమునే నిండె.. 😘",
+            "నీవు దేవి పార్వతిలా, నేను శివుడనవే",
+            "నీడ వలె నిన్ను కాపాడుటే నా జీవనమే 💖"
+        ];
+
+        const board = document.getElementById("board");
+        const bigEnvelope = document.getElementById("bigEnvelope");
+        let openedCount = 0;
+
+        messages.forEach((msg, index) => {
+            const envelope = document.createElement("div");
+            envelope.classList.add("envelope");
+            envelope.innerHTML = "📩";
+
+            const messageDiv = document.createElement("div");
+            messageDiv.classList.add("message");
+            messageDiv.innerText = msg;
+            envelope.appendChild(messageDiv);
+
+            envelope.onclick = function () {
+                if (!envelope.classList.contains("open")) {
+                    envelope.classList.add("open");
+                    openedCount++;
+
+                    if (openedCount === messages.length) {
+                        bigEnvelope.style.display = "flex"; // Show big envelope
+                    }
+                }
+            };
+
+            board.appendChild(envelope);
+        });
+
+        bigEnvelope.onclick = function () {
+            if (!this.classList.contains("open")) {
+                this.classList.add("open");
+                this.innerHTML = "💌<br><br>" +
+                    "ప్రియాతి ప్రియమైన కాబోయె శ్రీమతి వర్షిత గారికి,<br><br>" +
+                    "ఉభయ కుశలో భరీ!<br><br>" +
+                    "సఖీ...<br><br>" +
+                    "ఇది రాయున్నది నీ మీద ఎందుకు ఇంత ప్రేమో తెలపడానికి<br><br>" +
+                    "Uk I fell for you over the little cutu things you do, edannaaaaa the little head wobbles, the random noises, how you randomly sing that don song dhada puttista neku dhada puttista awhahahhaahah cutieee ahhh " +
+                    "the way you look at me when you think I'm not looking, the smile you get when I smile, " +
+                    "the way you really care, the way you pay attention and notice the little things about me, " +
+                    "the way we can be on call for hours and hours and not be bored at all ma ollaki naku time moves diff bro literally when im on call wid u vallu padkoni lechestaru and im still on call " +
+                    "the way you join in with me even if it's stupid, the way you " +
+                    "always turn up, if I call even if you're out you answer and talk, you always support me like how u fuckn stood lik a rock when i was preparing for IBM waifu brooo those voice messages that dayyy  " +
+                    "it's always fun when you're there, " +
+                    "the way you talk to everyone about us, the way you swing our arms when we walk, the way you " +
+                    "are jealous, ne buggalu , ne kallu abbabaa asalu katuka este inka cheppala matalu chalataya cheppu , the way you love me... These are just some of the many reasons why I love you. 💖♾️♾️♾️♾️HAAAAAAAAAAAAAAAAAAPPPPPPPPPPPPPPPPPPPPPPPIEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSSSSSSSSSTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT BUDDDDDDDDDDDDDAYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY MYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY CUTIEEEEEEEEEEEEEEEEEEEEEEEEEEEE BANGARUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU EVERYYYYYYYYYYYYYYTHINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG (KNOWWWWWWWWWW THAT I LOVEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE YOUUUUUUUUUUUUUUUUUUUUUUUUUU DOWNNNNNNNNNN TOOOOOOOOOO YOUUUUUUUUURRRRRRRRRRRR CHEEEEEEMIDIIIIIIIIIIIIIIIIIIIII)";
+
+                startConfetti();
+            }
+        };
+
+        function startConfetti() {
+            for (let i = 0; i < 100; i++) {
+                let confetti = document.createElement("div");
+                confetti.classList.add("confetti");
+                document.body.appendChild(confetti);
+
+                confetti.style.left = Math.random() * 100 + "vw";
+                confetti.style.animationDuration = (Math.random() * 2 + 1) + "s";
+                confetti.style.backgroundColor = randomColor();
+
+                setTimeout(() => confetti.remove(), 2000);
+            }
+        }
+
+        function randomColor() {
+            const colors = ["#ff4d6d", "#ff99c8", "#fcbf49", "#ff577f", "#ff9a8b", "#ff758f", "#ffc3a0"];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+    </script>
+
+</body>
+</html>
